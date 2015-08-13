@@ -13,6 +13,7 @@ OptionParser.new do |opts|
   opts.on('-p', '--postcontent "text"', 'Content for post') { |v| options[:post_contents] = v }
   opts.on('-O', '--overwrite', 'Overwrite if post exists?') { |v| options[:file_overwrite] = v }
   opts.on('-h', '--here', 'Writes to the current directory, even if there is a _posts dir available') { |v| options[:file_writehere] = v }
+  opts.on('-W', '--openwith "text"', 'If defined, opens the file the editor specified. eg: -O subl') { |v| options[:file_openwith] = v }
 
 end.parse!
 
@@ -90,3 +91,8 @@ end
 
 
 puts Dir.pwd + "/" + postFilename
+
+if options[:file_openwith] && File.file?(postFilename)
+  `#{options[:file_openwith]} #{postFilename}`
+  puts "-Opening with #{options[:file_openwith]}"
+end
