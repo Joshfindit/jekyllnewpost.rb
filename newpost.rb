@@ -10,6 +10,7 @@ OptionParser.new do |opts|
   opts.on('-t', '--title "Title"', 'Post Title') { |v| options[:post_title] = v }
   opts.on('-a', '--tags "tag1 tag2"', 'Tags for post - Space delimited') { |v| options[:post_tags] = v.split }	
   opts.on('-c', '--categories "cat1 cat2"', 'Categories for post - Space delimited') { |v| options[:post_categories] = v.split }
+  opts.on('-p', '--postcontent "text"', 'Content for post') { |v| options[:post_contents] = v }
 
 end.parse!
 
