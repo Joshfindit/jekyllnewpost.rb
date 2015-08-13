@@ -6,7 +6,7 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
 
-  opts.on('-d', '--date YYYY-MM-DD', 'Post date in YYYY-MM-DD') { |v| options[:post_date] = v }
+  opts.on('-d', '--date YYYY-MM-DD', 'Post date in YYYY-MM-DD. Can also handle YYYY and YYYY-MM') { |v| options[:post_date] = v }
   opts.on('-t', '--title "Title"', 'Post Title') { |v| options[:post_title] = v }
   opts.on('-a', '--tags "tag1 tag2"', 'Tags for post - Space delimited') { |v| options[:post_tags] = v.split }	
   opts.on('-c', '--categories "cat1 cat2"', 'Categories for post - Space delimited') { |v| options[:post_categories] = v.split }
