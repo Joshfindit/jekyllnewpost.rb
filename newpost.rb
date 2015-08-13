@@ -12,6 +12,7 @@ OptionParser.new do |opts|
   opts.on('-c', '--categories "cat1 cat2"', 'Categories for post - Space delimited') { |v| options[:post_categories] = v.split }
   opts.on('-p', '--postcontent "text"', 'Content for post') { |v| options[:post_contents] = v }
   opts.on('-O', '--overwrite', 'Overwrite if post exists?') { |v| options[:file_overwrite] = v }
+  opts.on('-h', '--here', 'Writes to the current directory, even if there is a _posts dir available') { |v| options[:file_writehere] = v }
 
 end.parse!
 
@@ -63,6 +64,7 @@ else
   postFilename.prepend("_posts/")
 end
 
+
 if  File.file?(postFilename) && options[:file_overwrite]
   File.open(postFilename, 'w') { |file|
     file.write(YAML.dump(frontmatter))
@@ -85,5 +87,6 @@ else
     file.write(options[:post_contents])
   }
 end
+
 
 puts Dir.pwd + "/" + postFilename
