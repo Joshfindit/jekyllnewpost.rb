@@ -15,6 +15,24 @@ OptionParser.new do |opts|
 
 end.parse!
 
+
+if /^[[:digit:]][[:digit:]][[:digit:]][[:digit:]]$/.match(options[:post_date])
+  puts "Date matches only year. Adding 06-01 as a sane default"
+  options[:post_date] = options[:post_date] + "-06-01"
+  estimatedDateTag = "DateEstimated_MonthDay"
+  #Don't forget the manually added tag: DateEstimated_YearMonthDay for when the date is completely fuzzy
+
+elsif /^[[:digit:]][[:digit:]][[:digit:]][[:digit:]]\-[[:digit:]][[:digit:]]$/.match(options[:post_date])
+  puts "Date matches only year and month. Adding day 01"
+  options[:post_date] = options[:post_date] + "-01"
+  estimatedDateTag = "DateEstimated_Day"
+elsif /^[[:digit:]][[:digit:]][[:digit:]][[:digit:]]\-[[:digit:]][[:digit:]]\-[[:digit:]][[:digit:]]$/.match(options[:post_date])
+  # puts "Matches year, month, and day"
+  estimatedDateTag = nil
+else 
+  puts Date invalid!
+end
+
 # For debugging, uncomment the next line
 # puts options
 
@@ -24,7 +42,7 @@ frontmatter = {
   'layout' => 'post',
   'title' => options[:post_title],
   'date' => options[:post_date],
-  'tags' => options[:post_tags],
+  'tags' => options[:post_tags] << estimatedDateTag,
   'categories' => options[:post_categories]
 }
 
