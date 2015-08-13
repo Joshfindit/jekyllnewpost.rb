@@ -11,6 +11,7 @@ OptionParser.new do |opts|
   opts.on('-a', '--tags "tag1 tag2"', 'Tags for post - Space delimited') { |v| options[:post_tags] = v.split }	
   opts.on('-c', '--categories "cat1 cat2"', 'Categories for post - Space delimited') { |v| options[:post_categories] = v.split }
   opts.on('-p', '--postcontent "text"', 'Content for post') { |v| options[:post_contents] = v }
+  opts.on('-O', '--overwrite', 'Overwrite if post exists?') { |v| options[:file_overwrite] = v }
 
 end.parse!
 
@@ -44,12 +45,27 @@ else
   postFilename.prepend("_posts/")
 end
 
-File.open(postFilename, 'w') { |file|
+if  File.file?(postFilename) && options[:file_overwrite]
+  File.open(postFilename, 'w') { |file|
     file.write(YAML.dump(frontmatter))
     file.write("---")
     file.write("\n")
     file.write("\n")
     file.write(options[:post_contents])
   }
+  puts "File overwritten"
+
+elsif File.file?(postFilename)
+  puts "File exists, please use a different name. Use -O to overwrite"
+
+else
+   File.open(postFilename, 'w') { |file|
+    file.write(YAML.dump(frontmatter))
+    file.write("---")
+    file.write("\n")
+    file.write("\n")
+    file.write(options[:post_contents])
+  }
+end
 
 puts Dir.pwd + "/" + postFilename
