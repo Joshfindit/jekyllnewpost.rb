@@ -17,6 +17,9 @@ OptionParser.new do |opts|
 
 end.parse!
 
+# For debugging, uncomment the next line
+# puts options
+
 
 if /^[[:digit:]][[:digit:]][[:digit:]][[:digit:]]$/.match(options[:post_date])
   puts "Date matches only year. Adding 06-01 as a sane default"
@@ -35,8 +38,6 @@ else
   puts Date invalid!
 end
 
-# For debugging, uncomment the next line
-# puts options
 
 postFilename = (options[:post_date] + "-" + (options[:post_title]) + ".md").gsub! /\s+/, '-'
 
@@ -91,6 +92,7 @@ end
 
 
 puts Dir.pwd + "/" + postFilename
+
 
 if options[:file_openwith] && File.file?(postFilename)
   `#{options[:file_openwith]} #{postFilename}`
