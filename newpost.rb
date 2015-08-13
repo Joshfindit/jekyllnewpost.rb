@@ -4,7 +4,7 @@ require 'yaml'
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: example.rb [options]"
+  opts.banner = "Usage: newpost.rb [options]"
 
   opts.on('-d', '--date YYYY-MM-DD', 'Post date in YYYY-MM-DD. Can also handle YYYY and YYYY-MM') { |v| options[:post_date] = v }
   opts.on('-t', '--title "Title"', 'Post Title') { |v| options[:post_title] = v }
