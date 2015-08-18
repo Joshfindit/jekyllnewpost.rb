@@ -11,4 +11,4 @@ Outputs to _posts if run from the root folder.
       -p, --postcontent "text"         Content for post
       -O, --Overwrite                  Overwrite if post exists
       -h, --here                       Writes to the current directory, even if there is a _posts dir available
-      -W, --openwith "text"            If defined, opens the file the editor specified. eg: -O subl
+      -W, --openwith "text"            If defined, opens the file in the editor specified. eg: -O subl
