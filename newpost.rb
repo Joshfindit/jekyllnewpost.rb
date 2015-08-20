@@ -44,13 +44,23 @@ end
 
 postFilename = (options[:post_date] + "-" + (options[:post_title]) + ".md").gsub! /\s+/, '-'
 
-frontmatter = {
-  'layout' => 'post',
-  'title' => options[:post_title],
-  'date' => options[:post_date],
-  'tags' => options[:post_tags] << estimatedDateTag,
-  'categories' => options[:post_categories]
-}
+if options[:post_tags]
+  frontmatter = {
+    'layout' => 'post',
+    'title' => options[:post_title],
+    'date' => options[:post_date],
+    'tags' => options[:post_tags] << estimatedDateTag,
+    'categories' => options[:post_categories]
+  }
+else
+  frontmatter = {
+    'layout' => 'post',
+    'title' => options[:post_title],
+    'date' => options[:post_date],
+    'tags' => [] << estimatedDateTag,
+    'categories' => options[:post_categories]
+  }
+end
 
 # ---
 # layout:     post
