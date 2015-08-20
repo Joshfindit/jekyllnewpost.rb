@@ -24,7 +24,7 @@ if options[:post_date].nil?
   options[:post_date] = Time.now.strftime("%Y-%m-%d")
 else
   if /^[[:digit:]][[:digit:]][[:digit:]][[:digit:]]$/.match(options[:post_date])
-    puts "Date matches only year. Adding 06-01 as a sane default"
+    puts "Date matches only year. Adding 06-01 as a sane default."
     options[:post_date] = options[:post_date] + "-06-01"
     estimatedDateTag = "DateEstimated_MonthDay"
     #Don't forget the manually added tag: DateEstimated_YearMonthDay for when the date is completely fuzzy
@@ -76,7 +76,9 @@ if Dir.pwd.end_with? "_posts" or options[:file_writehere]
   isInPostsDir = true
 else
   isInPostsDir = false
-  postFilename.prepend("_posts/")
+  if File.directory?(Dir.pwd << "/_posts")
+    postFilename.prepend("_posts/")
+  end
 end
 
 
