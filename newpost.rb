@@ -48,8 +48,11 @@ else
   end
 end
 
-
-postFilename = (options[:post_date] + "-" + (options[:post_title]) + ".md").gsub! /\s+/, '-'
+if postTitle = options[:post_title].gsub!(/\s+/, '-')
+  postFilename = (options[:post_date] + "-" + (postTitle) + ".md")
+else
+  postFilename = (options[:post_date] + "-" + (options[:post_title]) + ".md")
+end
 
 if options[:post_tags]
   frontmatter = {
