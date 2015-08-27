@@ -20,6 +20,13 @@ end.parse!
 # For debugging, uncomment the next line
 # puts options
 
+if /^[[:digit:]][[:digit:]][[:digit:]][[:digit:]][[:digit:]][[:digit:]][[:digit:]][[:digit:]]$/.match(options[:post_date])
+  options[:post_date] = options[:post_date].insert(-3, '-').insert(-6, '-')
+  puts "Added dashes to the submitted date: #{options[:post_date]}"
+end
+
+
+
 if options[:post_date].nil?
   options[:post_date] = Time.now.strftime("%Y-%m-%d")
 else
