@@ -48,7 +48,7 @@ else
   end
 end
 
-if postTitle = options[:post_title].gsub!(/\s+/, '-')
+if postTitle = options[:post_title].gsub(/\s+/, '-')
   postFilename = (options[:post_date] + "-" + (postTitle) + ".md")
 else
   postFilename = (options[:post_date] + "-" + (options[:post_title]) + ".md")
